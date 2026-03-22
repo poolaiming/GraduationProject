@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>新闻资讯互动平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --enter-duration: 0.72s;
+        --enter-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+
+      @keyframes module-enter {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.985);
+          filter: blur(3px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      .enter-target {
+        opacity: 0;
+        will-change: opacity, transform, filter;
+      }
+
+      .enter-target.enter-in {
+        animation: module-enter var(--enter-duration) var(--enter-ease) both;
+        animation-delay: var(--enter-delay, 0ms);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .enter-target,
+        .enter-target.enter-in {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      (function () {
+        const selectors = [
+          '#app > *',
+          '[data-module]',
+          '.module',
+          '.section',
+          '.panel',
+          '.card',
+          '.block',
+          'main > section',
+          'section',
+          'article',
+          '.el-card',
+          '.ant-card',
+          '.n-card',
+          '.v-card'
+        ];
+
+        const seen = new WeakSet();
+        let observer;
+
+        const shouldSkip = (el) => {
+          if (!(el instanceof HTMLElement)) return true;
+          if (seen.has(el)) return true;
+          const style = window.getComputedStyle(el);
+          if (style.display === 'none' || style.visibility === 'hidden') return true;
+          if (el.offsetParent === null && style.position !== 'fixed') return true;
+          return false;
+        };
+
+        const activate = (el, delayMs) => {
+          el.classList.add('enter-target');
+          el.style.setProperty('--enter-delay', delayMs + 'ms');
+          requestAnimationFrame(() => el.classList.add('enter-in'));
+          seen.add(el);
+        };
+
+        const collectTargets = () => {
+          const all = new Set();
+          selectors.forEach((selector) => {
+            document.querySelectorAll(selector).forEach((el) => all.add(el));
+          });
+          return Array.from(all).filter((el) => !shouldSkip(el));
+        };
+
+        const setupObserver = () => {
+          observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const index = Number(el.getAttribute('data-enter-index') || 0);
+                activate(el, Math.min(index * 70, 520));
+                observer.unobserve(el);
+              });
+            },
+            { threshold: 0.08, rootMargin: '0px 0px -8% 0px' }
+          );
+        };
+
+        const registerTargets = () => {
+          const targets = collectTargets();
+          targets.forEach((el, index) => {
+            if (seen.has(el)) return;
+            el.setAttribute('data-enter-index', String(index));
+            observer.observe(el);
+          });
+        };
+
+        const boot = () => {
+          if (!('IntersectionObserver' in window)) {
+            collectTargets().forEach((el, index) => activate(el, Math.min(index * 70, 520)));
+            return;
+          }
+          setupObserver();
+          registerTargets();
+
+          const mo = new MutationObserver(() => registerTargets());
+          mo.observe(document.body, { childList: true, subtree: true });
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', boot, { once: true });
+        } else {
+          boot();
+        }
+      })();
+    </script>
+  </body>
+</html>
+
