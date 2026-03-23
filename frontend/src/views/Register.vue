@@ -1,23 +1,6 @@
 <template>
   <div class="page-register">
-    <div class="register-bg" aria-hidden="true">
-      <svg class="register-bg-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="registerGradientA" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.28" />
-            <stop offset="100%" stop-color="#001b44" stop-opacity="0.08" />
-          </linearGradient>
-          <linearGradient id="registerGradientB" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.22" />
-            <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.05" />
-          </linearGradient>
-        </defs>
-        <circle class="svg-orb orb-a" cx="1180" cy="180" r="180" fill="url(#registerGradientA)" />
-        <circle class="svg-orb orb-b" cx="220" cy="220" r="130" fill="url(#registerGradientB)" />
-        <path class="svg-wave wave-a" d="M0 640C200 590 360 600 520 654C704 716 826 754 996 710C1144 672 1266 612 1440 632V900H0V640Z" fill="url(#registerGradientA)" />
-        <path class="svg-wave wave-b" d="M0 730C150 766 328 790 520 754C700 720 828 640 1020 638C1186 636 1308 694 1440 742V900H0V730Z" fill="url(#registerGradientB)" />
-      </svg>
-    </div>
+
 
     <div class="app-card register-card">
       <div class="brand-head">
@@ -38,10 +21,26 @@
           <el-input v-model="form.nickname" placeholder="请输入昵称" @keyup.enter="onSubmit" />
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password" type="password" show-password placeholder="请输入密码" @keyup.enter="onSubmit" />
+          <el-input 
+            v-model="form.password" 
+            type="password" 
+            show-password 
+            placeholder="请输入密码" 
+            @keyup.enter="onSubmit" 
+            @focus="isBlind = true"
+            @blur="isBlind = false"
+          />
         </el-form-item>
         <el-form-item label="确认密码" prop="confirmPassword">
-          <el-input v-model="form.confirmPassword" type="password" show-password placeholder="请再次输入密码" @keyup.enter="onSubmit" />
+          <el-input 
+            v-model="form.confirmPassword" 
+            type="password" 
+            show-password 
+            placeholder="请再次输入密码" 
+            @keyup.enter="onSubmit"
+            @focus="isBlind = true"
+            @blur="isBlind = false"
+          />
         </el-form-item>
         <el-form-item label="验证码" prop="captchaCode">
           <div class="captcha-row">
@@ -63,6 +62,10 @@
         <button type="button" class="switch-button" @click="router.push('/login')">立即登录</button>
       </div>
     </div>
+
+    <div class="avatar-container">
+      <InteractiveAvatar :isBlind="isBlind" />
+    </div>
   </div>
 </template>
 
@@ -71,10 +74,12 @@ import { reactive, ref, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { register, fetchCaptcha } from '../api/auth';
+import InteractiveAvatar from '../components/InteractiveAvatar.vue';
 
 const router = useRouter();
 const formRef = ref(null);
 const loading = ref(false);
+const isBlind = ref(false);
 const captchaKey = ref('');
 const captchaUrl = ref('');
 
@@ -180,10 +185,17 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 120px;
   min-height: calc(100vh - 64px);
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
+
+.avatar-container {
+  width: 320px;
+  height: 320px;
+  pointer-events: none;
 }
 
 .register-bg {
@@ -430,6 +442,12 @@ onMounted(() => {
   box-shadow: 0 18px 32px rgba(14,165,233,.26);
 }
 .auth-submit:active { transform: translateY(0); }
+
+@media (max-width: 992px) {
+  .avatar-container {
+    display: none;
+  }
+}
 
 @media (max-width: 768px) {
   .register-card {

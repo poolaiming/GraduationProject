@@ -1,23 +1,6 @@
 <template>
   <div class="home-page">
-    <div class="home-bg" aria-hidden="true">
-      <svg class="home-bg-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="homeGradientA" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.22" />
-            <stop offset="100%" stop-color="#001b44" stop-opacity="0.06" />
-          </linearGradient>
-          <linearGradient id="homeGradientB" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.18" />
-            <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.04" />
-          </linearGradient>
-        </defs>
-        <circle class="home-orb orb-a" cx="180" cy="140" r="150" fill="url(#homeGradientA)" />
-        <circle class="home-orb orb-b" cx="1250" cy="180" r="120" fill="url(#homeGradientB)" />
-        <path class="home-wave wave-a" d="M0 620C170 566 366 574 534 640C712 710 844 752 1026 712C1178 678 1300 618 1440 632V900H0V620Z" fill="url(#homeGradientA)" />
-        <path class="home-wave wave-b" d="M0 720C184 770 350 790 546 754C730 720 850 646 1022 642C1188 640 1300 690 1440 736V900H0V720Z" fill="url(#homeGradientB)" />
-      </svg>
-    </div>
+
 
     <div class="app-card motion-block motion-delay-1">
       <div class="app-page-title motion-block motion-delay-2">{{ recommendPanelTitle }}</div>
