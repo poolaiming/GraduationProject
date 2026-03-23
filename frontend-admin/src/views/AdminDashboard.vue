@@ -582,11 +582,11 @@ onMounted(async () => {
 
 
 
-.stat-value { font-size: 28px; font-weight: 600; color: #2563eb; }
+.stat-value { font-size: 28px; font-weight: 600; color: #001b44; }
 
 
 
-.stat-label { margin-top: 4px; font-size: 14px; color: #64748b; }
+.stat-label { margin-top: 4px; font-size: 14px; color: #747781; }
 
 
 
@@ -595,6 +595,3 @@ onMounted(async () => {
 
 
 </style>
-
-
-
