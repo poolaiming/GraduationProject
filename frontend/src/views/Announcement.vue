@@ -33,8 +33,9 @@
       v-model="detailVisible"
       title="公告详情"
       width="780px"
-      top="8vh"
+      top="132px"
       class="announcement-detail-dialog"
+      style="transform: translateX(-2px)"
       destroy-on-close
     >
       <div v-if="current" class="announcement-detail-container">

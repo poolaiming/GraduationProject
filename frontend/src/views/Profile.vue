@@ -171,7 +171,7 @@
       </el-row>
     </div>
 
-    <el-dialog v-model="passwordVisible" title="修改密码" width="520px">
+    <el-dialog v-model="passwordVisible" title="修改密码" width="520px" top="153px" style="transform: translateX(5px)">
       <el-form :model="passwordForm" label-width="92px">
         <el-form-item label="原密码"><el-input v-model="passwordForm.oldPassword" type="password" show-password /></el-form-item>
         <el-form-item label="新密码"><el-input v-model="passwordForm.newPassword" type="password" show-password /></el-form-item>
@@ -222,8 +222,8 @@
       v-model="editNewsVisible"
       title="编辑新闻"
       width="760px"
-      top="5vh"
-      style="max-width: 95vw;"
+      top="119px"
+      style="max-width: 95vw; transform: translateX(-19px);"
       draggable
       overflow
     >
