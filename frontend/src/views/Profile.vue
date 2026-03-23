@@ -811,7 +811,7 @@ onMounted(async () => {
 }
 
 .history-link {
-  color: #2563eb;
+  color: #001b44;
   cursor: pointer;
   text-decoration: none;
 }

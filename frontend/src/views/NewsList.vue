@@ -457,7 +457,7 @@ onMounted(() => {
 }
 
 .title-link {
-  color: #2563eb;
+  color: #001b44;
   cursor: pointer;
   font-weight: 500;
 }
@@ -555,7 +555,7 @@ gap: 10px;
 }
 
 .news-card:hover .news-card-title {
-  color: var(--app-primary, #2563eb);
+  color: var(--app-primary, #001b44);
 }
 
 .news-card-cover {

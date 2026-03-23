@@ -1,26 +1,30 @@
-:root {
-  --app-bg: #f2f4f8;
-  --app-bg-soft: #f6f7fa;
-  --app-surface: #ffffff;
-  --app-surface-soft: #f7f8fa;
-  --app-border: #e5e7eb;
-  --app-border-strong: #d9dde4;
-  --app-text-main: #0f172a;
-  --app-text-sub: #64748b;
-  --app-primary: #2563eb;
-  --app-primary-hover: #1d4ed8;
-  --app-shadow-card: 0 10px 30px rgba(15, 23, 42, 0.06);
-  --app-shadow-soft: 0 6px 20px rgba(15, 23, 42, 0.05);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --el-color-primary: #2563eb;
-  --el-color-success: #16a34a;
-  --el-color-warning: #d97706;
-  --el-color-danger: #dc2626;
-  --el-text-color-primary: #0f172a;
-  --el-text-color-regular: #334155;
-  --el-text-color-secondary: #64748b;
-  --el-border-color: #e2e8f0;
-  --el-border-color-light: #edf2f7;
+:root {
+  --app-bg: #fbf9f8;
+  --app-bg-soft: #f5f3f3;
+  --app-surface: #ffffff;
+  --app-surface-soft: #fbf9f8;
+  --app-border: #e4e2e2;
+  --app-border-strong: #c4c6d2;
+  --app-text-main: #1b1c1c;
+  --app-text-sub: #434750;
+  --app-primary: #001b44;
+  --app-primary-hover: #224583;
+  --app-shadow-card: 0 10px 30px rgba(0, 27, 68, 0.06);
+  --app-shadow-soft: 0 6px 20px rgba(0, 27, 68, 0.04);
+
+  --el-color-primary: #001b44;
+  --el-color-success: #006d43;
+  --el-color-warning: #fbbc00;
+  --el-color-danger: #ba1a1a;
+  --el-text-color-primary: #1b1c1c;
+  --el-text-color-regular: #434750;
+  --el-text-color-secondary: #747781;
+  --el-border-color: #e4e2e2;
+  --el-border-color-light: #f5f3f3;
   --el-border-radius-base: 10px;
 }
 
@@ -36,7 +40,7 @@ body,
 }
 
 body {
-  background: linear-gradient(180deg, #f7f8fa 0%, var(--app-bg) 100%);
+  background: linear-gradient(180deg, var(--app-surface) 0%, var(--app-bg) 100%);
   color: var(--app-text-main);
   font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -170,11 +174,11 @@ body {
 }
 
 .el-button--primary {
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.16);
+  box-shadow: 0 4px 10px rgba(0, 27, 68, 0.16);
 }
 
 .el-button--primary:hover {
-  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 27, 68, 0.2);
 }
 
 .el-input__wrapper,

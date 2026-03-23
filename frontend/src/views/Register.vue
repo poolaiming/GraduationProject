@@ -5,7 +5,7 @@
         <defs>
           <linearGradient id="registerGradientA" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.28" />
-            <stop offset="100%" stop-color="#2563EB" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#001b44" stop-opacity="0.08" />
           </linearGradient>
           <linearGradient id="registerGradientB" x1="1" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.22" />

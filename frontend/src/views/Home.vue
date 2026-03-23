@@ -5,7 +5,7 @@
         <defs>
           <linearGradient id="homeGradientA" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.22" />
-            <stop offset="100%" stop-color="#2563EB" stop-opacity="0.06" />
+            <stop offset="100%" stop-color="#001b44" stop-opacity="0.06" />
           </linearGradient>
           <linearGradient id="homeGradientB" x1="1" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.18" />
@@ -380,7 +380,7 @@ onMounted(async () => {
 }
 
 .news-card:hover .news-card-title {
-  color: var(--app-primary, #2563eb);
+  color: var(--app-primary, #001b44);
 }
 
 .news-card-cover {

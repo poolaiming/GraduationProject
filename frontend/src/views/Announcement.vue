@@ -217,9 +217,9 @@ onMounted(loadData);
 }
 
 .announcement-card.is-active {
-  border-color: var(--app-primary, #2563eb);
+  border-color: var(--app-primary, #001b44);
   background: #f8fafc;
-  box-shadow: 0 0 0 1px var(--app-primary, #2563eb);
+  box-shadow: 0 0 0 1px var(--app-primary, #001b44);
 }
 
 .announcement-card-header {
@@ -251,7 +251,7 @@ onMounted(loadData);
 }
 
 .announcement-card:hover .announcement-card-title {
-  color: var(--app-primary, #2563eb);
+  color: var(--app-primary, #001b44);
 }
 
 .announcement-card-meta {
