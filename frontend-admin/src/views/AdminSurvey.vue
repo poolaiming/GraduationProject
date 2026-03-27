@@ -561,9 +561,9 @@ onMounted(loadData);
 
   padding: 6px 10px;
 
-  background: #f8fafc;
+  background: var(--app-surface-raised);
 
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--app-border);
 
   border-radius: 8px;
 
@@ -583,9 +583,9 @@ onMounted(loadData);
 
   border-radius: 50%;
 
-  background: #dbeafe;
+  background: rgba(147, 176, 234, 0.14);
 
-  color: #2563eb;
+  color: var(--app-accent);
 
   font-size: 12px;
 

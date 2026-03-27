@@ -178,7 +178,7 @@
 
 
 
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onBeforeUnmount, onMounted, nextTick } from 'vue';
 
 
 
@@ -187,6 +187,7 @@ import * as echarts from 'echarts';
 
 
 import { getDashboard, getInteractionTrend } from '../api/admin';
+import { THEME_CHANGE_EVENT } from '../utils/theme';
 
 
 
@@ -223,6 +224,84 @@ let chartInstance = null;
 
 
 let trendChartInstance = null;
+
+
+
+const getCssVar = (name, fallback) => {
+
+
+
+  if (typeof window === 'undefined') return fallback;
+
+
+
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+
+
+  return value || fallback;
+
+
+
+};
+
+
+
+const getChartTheme = () => ({
+
+
+
+  textPrimary: getCssVar('--app-text-main', '#e7eef9'),
+
+
+
+  textSecondary: getCssVar('--app-text-sub', '#a3b2c9'),
+
+
+
+  border: getCssVar('--app-border', '#2f435d'),
+
+
+
+  surface: getCssVar('--app-surface-raised', '#16243c'),
+
+
+
+  accent: getCssVar('--app-accent', '#93b0ea')
+
+
+
+});
+
+const refreshCharts = () => {
+
+
+
+  if (chartInstance) {
+
+
+
+    initChart();
+
+
+
+  }
+
+
+
+  if (trendChartInstance) {
+
+
+
+    initTrendChart(trendData.value);
+
+
+
+  }
+
+
+
+};
 
 
 
@@ -282,15 +361,19 @@ const initChart = () => {
 
 
 
+  const theme = getChartTheme();
+
+
+
   chartInstance.setOption({
 
 
 
-    tooltip: { trigger: 'item' },
+    tooltip: { trigger: 'item', backgroundColor: theme.surface, borderColor: theme.border, textStyle: { color: theme.textPrimary } },
 
 
 
-    legend: { bottom: 0 },
+    legend: { bottom: 0, textStyle: { color: theme.textSecondary } },
 
 
 
@@ -303,6 +386,18 @@ const initChart = () => {
 
 
       radius: ['40%', '70%'],
+
+
+
+      label: { color: theme.textPrimary },
+
+
+
+      labelLine: { lineStyle: { color: theme.border } },
+
+
+
+      itemStyle: { borderColor: theme.surface, borderWidth: 2 },
 
 
 
@@ -402,15 +497,19 @@ const initTrendChart = (data) => {
 
 
 
+  const theme = getChartTheme();
+
+
+
   trendChartInstance.setOption({
 
 
 
-    tooltip: { trigger: 'axis' },
+    tooltip: { trigger: 'axis', backgroundColor: theme.surface, borderColor: theme.border, textStyle: { color: theme.textPrimary } },
 
 
 
-    legend: { top: 8 },
+    legend: { top: 8, textStyle: { color: theme.textSecondary } },
 
 
 
@@ -418,11 +517,11 @@ const initTrendChart = (data) => {
 
 
 
-    xAxis: { type: 'category', data: data.dates || [] },
+    xAxis: { type: 'category', data: data.dates || [], axisLabel: { color: theme.textSecondary }, axisLine: { lineStyle: { color: theme.border } } },
 
 
 
-    yAxis: { type: 'value', minInterval: 1 },
+    yAxis: { type: 'value', minInterval: 1, axisLabel: { color: theme.textSecondary }, splitLine: { lineStyle: { color: theme.border, opacity: 0.45 } } },
 
 
 
@@ -430,15 +529,15 @@ const initTrendChart = (data) => {
 
 
 
-      { name: '点赞', type: 'line', smooth: true, data: data.likes || [] },
+      { name: '点赞', type: 'line', smooth: true, data: data.likes || [], lineStyle: { color: '#93b0ea', width: 3 }, itemStyle: { color: '#93b0ea' } },
 
 
 
-      { name: '收藏', type: 'line', smooth: true, data: data.collects || [] },
+      { name: '收藏', type: 'line', smooth: true, data: data.collects || [], lineStyle: { color: '#59de9b', width: 3 }, itemStyle: { color: '#59de9b' } },
 
 
 
-      { name: '评论', type: 'line', smooth: true, data: data.comments || [] }
+      { name: '评论', type: 'line', smooth: true, data: data.comments || [], lineStyle: { color: '#fbbc00', width: 3 }, itemStyle: { color: '#fbbc00' } }
 
 
 
@@ -546,11 +645,35 @@ onMounted(async () => {
 
 
 
+  window.addEventListener(THEME_CHANGE_EVENT, refreshCharts);
+
+
+
   await loadData();
 
 
 
   await loadTrend();
+
+
+
+});
+
+
+
+onBeforeUnmount(() => {
+
+
+
+  window.removeEventListener(THEME_CHANGE_EVENT, refreshCharts);
+
+
+
+  chartInstance?.dispose();
+
+
+
+  trendChartInstance?.dispose();
 
 
 
@@ -582,11 +705,11 @@ onMounted(async () => {
 
 
 
-.stat-value { font-size: 28px; font-weight: 600; color: #001b44; }
+.stat-value { font-size: 28px; font-weight: 600; color: var(--app-accent); }
 
 
 
-.stat-label { margin-top: 4px; font-size: 14px; color: #747781; }
+.stat-label { margin-top: 4px; font-size: 14px; color: var(--app-text-sub); }
 
 
 

@@ -1,11 +1,11 @@
 <template>
   <div class="bg-background text-on-background flex h-screen overflow-hidden font-body">
     <!-- SideNavBar -->
-    <aside class="w-64 bg-primary text-on-primary flex flex-col shrink-0">
+    <aside class="w-64 bg-primary text-on-primary flex flex-col shrink-0 border-r border-outline-variant/20">
       <div class="p-6">
         <div class="flex items-center gap-3 mb-1">
           <div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
-            <span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">newspaper</span>
+            <span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">newspaper</span>
           </div>
           <h1 class="text-xl font-extrabold tracking-tight font-headline">极客新闻后台</h1>
         </div>
@@ -18,23 +18,45 @@
           :key="item.path"
           :to="item.path"
           :class="[
-            'flex items-center gap-3 px-4 py-3 rounded-xl transition-colors',
-            route.path === item.path || (item.path !== '/dashboard' && route.path.startsWith(item.path))
-              ? 'bg-primary-container text-white'
-              : 'text-on-primary-container hover:bg-white/5'
+            'sidebar-nav-link flex items-center gap-3 px-4 py-3 rounded-xl transition-colors',
+            isMenuItemActive(item.path)
+              ? 'sidebar-nav-link-active shadow-sm'
+              : 'text-on-primary-container hover:bg-surface-container-low'
           ]"
         >
           <span
             class="material-symbols-outlined"
-            :style="{ fontVariationSettings: (route.path === item.path || (item.path !== '/dashboard' && route.path.startsWith(item.path))) ? `'FILL' 1` : `'FILL' 0` }"
+            :style="{ fontVariationSettings: isMenuItemActive(item.path) ? `'FILL' 1` : `'FILL' 0` }"
           >{{ item.icon }}</span>
           <span class="font-medium">{{ item.name }}</span>
         </router-link>
       </nav>
 
-      <div class="p-6 border-t border-white/10 flex items-center gap-3">
+      <div class="px-4 pb-4">
+        <button
+          class="theme-toggle-button w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-left transition-colors hover:bg-surface-container"
+          @click="handleThemeToggle"
+          :title="isDarkTheme ? '切换到白天模式' : '切换到黑夜模式'"
+        >
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-primary-container">
+              {{ isDarkTheme ? 'light_mode' : 'dark_mode' }}
+            </span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-on-primary">
+                {{ isDarkTheme ? '白天模式' : '黑夜模式' }}
+              </p>
+              <p class="text-xs text-on-primary-container opacity-80">
+                {{ isDarkTheme ? '切回明亮界面' : '切回深色界面' }}
+              </p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="p-6 border-t border-outline-variant/20 flex items-center gap-3">
         <div class="w-10 h-10 rounded-full border-2 border-primary-container bg-surface-container flex items-center justify-center overflow-hidden">
-          <span class="material-symbols-outlined text-primary">person</span>
+          <span class="material-symbols-outlined text-on-primary">person</span>
         </div>
         <div>
           <p class="text-sm font-bold">{{ adminStore.adminInfo?.username || 'Admin User' }}</p>
@@ -53,10 +75,10 @@
           </div>
         </div>
         <div class="flex items-center gap-6">
-          <h2 class="text-sm font-bold text-primary mr-4 font-headline">{{ route.meta?.title || '管理后台' }}</h2>
+          <h2 class="text-sm font-bold text-on-primary-container mr-4 font-headline">{{ route.meta?.title || '管理后台' }}</h2>
           <div class="flex items-center gap-4 border-l border-outline-variant/20 pl-6">
-            <button class="relative hover:text-primary transition-colors cursor-pointer group" @click="goHome" title="返回前台">
-              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">home</span>
+            <button class="relative hover:text-on-primary-container transition-colors cursor-pointer group" @click="goHome" title="返回前台">
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container">home</span>
             </button>
             <button class="relative hover:text-error transition-colors cursor-pointer group" @click="handleLogout" title="退出登录">
               <span class="material-symbols-outlined text-on-surface-variant group-hover:text-error">logout</span>
@@ -74,12 +96,40 @@
 </template>
 
 <script setup>
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAdminStore } from '../store/admin';
+import { THEME_CHANGE_EVENT, getStoredTheme, toggleTheme } from '../utils/theme';
 
 const route = useRoute();
 const router = useRouter();
 const adminStore = useAdminStore();
+const currentTheme = ref(getStoredTheme());
+
+const getTopLevelPath = (path) => {
+  const [firstSegment] = path.split('/').filter(Boolean);
+  return firstSegment ? `/${firstSegment}` : '/dashboard';
+};
+
+const activeMenuPath = computed(() => getTopLevelPath(route.path));
+
+const isMenuItemActive = (menuPath) => {
+  if (menuPath === '/dashboard') {
+    return route.path === '/dashboard';
+  }
+
+  return activeMenuPath.value === menuPath;
+};
+
+const isDarkTheme = computed(() => currentTheme.value === 'dark');
+
+const syncThemeState = (event) => {
+  currentTheme.value = event?.detail || document.documentElement.dataset.theme || getStoredTheme();
+};
+
+const handleThemeToggle = () => {
+  currentTheme.value = toggleTheme();
+};
 
 const menuItems = [
   { path: '/dashboard', name: '数据统计', icon: 'monitoring' },
@@ -101,15 +151,35 @@ const handleLogout = () => {
   adminStore.logout();
   router.push('/login');
 };
+
+onMounted(() => {
+  window.addEventListener(THEME_CHANGE_EVENT, syncThemeState);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener(THEME_CHANGE_EVENT, syncThemeState);
+});
 </script>
 
 <style scoped>
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #c4c6d2; border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--app-scrollbar-thumb); border-radius: 10px; }
 
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   vertical-align: middle;
+}
+
+.theme-toggle-button {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+.sidebar-nav-link-active {
+  color: var(--app-sidebar-active-text);
+  background:
+    linear-gradient(135deg, var(--app-sidebar-active-start) 0%, var(--app-sidebar-active-end) 100%);
+  border: 1px solid var(--app-sidebar-active-border);
+  box-shadow: var(--app-sidebar-active-shadow);
 }
 </style>

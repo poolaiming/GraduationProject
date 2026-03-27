@@ -525,36 +525,36 @@ onMounted(async () => {
 .toolbar { margin-bottom: 16px; display: flex; gap: 12px; }
 .pager { margin-top: 16px; }
 .tag-cell { display: flex; flex-wrap: wrap; gap: 6px; }
-.detail-card { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; }
-.detail-title { margin:0; font-size:22px; color:#0f172a; }
-.detail-meta { margin-top:8px; color:#64748b; display:flex; gap:16px; flex-wrap:wrap; }
+.detail-card { background: var(--app-surface-raised); border: 1px solid var(--app-border); border-radius: 10px; padding: 16px; }
+.detail-title { margin: 0; font-size: 22px; color: var(--app-text-main); }
+.detail-meta { margin-top: 8px; color: var(--app-text-sub); display: flex; gap: 16px; flex-wrap: wrap; }
 .detail-block { margin-top: 10px; }
 .detail-block-title {
   display: inline-block;
   font-size: 13px;
   font-weight: 600;
-  color: #1e3a8a;
-  background: #eaf2ff;
-  border: 1px solid #cfe1ff;
+  color: var(--app-accent);
+  background: rgba(147, 176, 234, 0.12);
+  border: 1px solid rgba(147, 176, 234, 0.2);
   border-radius: 6px;
   padding: 2px 8px;
   margin-bottom: 8px;
 }
 .detail-summary {
-  color:#334155;
+  color: var(--app-text-sub);
   margin-bottom:10px;
   padding: 10px 12px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
   border-radius: 8px;
   line-height: 1.7;
 }
 .detail-content {
   line-height:1.8;
-  color:#1e293b;
+  color: var(--app-text-main);
   padding: 12px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
   border-radius: 8px;
 }
 
@@ -577,22 +577,22 @@ onMounted(async () => {
 
 .content-preview {
   margin-top: 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--app-border);
   border-radius: 8px;
-  background: #fafafa;
+  background: var(--app-surface-raised);
 }
 
 .content-preview-title {
   font-size: 13px;
-  color: #475569;
+  color: var(--app-text-sub);
   font-weight: 600;
   padding: 8px 10px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--app-border);
 }
 
 .content-preview-body {
   padding: 10px;
-  color: #1e293b;
+  color: var(--app-text-main);
   line-height: 1.8;
 }
 
