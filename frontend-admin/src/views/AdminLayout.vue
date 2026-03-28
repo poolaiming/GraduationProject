@@ -7,7 +7,7 @@
           <div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
             <span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">newspaper</span>
           </div>
-          <h1 class="text-xl font-extrabold tracking-tight font-headline">极客新闻后台</h1>
+          <h1 class="text-xl font-extrabold tracking-tight font-headline">新闻后台</h1>
         </div>
         <p class="text-xs text-on-primary-container font-medium opacity-80">Platform Admin</p>
       </div>

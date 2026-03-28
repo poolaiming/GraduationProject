@@ -1,110 +1,29 @@
 <template>
-
-
-
   <div class="admin-page">
-
-
-
     <el-card>
-
-
-
       <template #header><span>公告资讯管理</span></template>
-
-
-
-
-
-
-
       <div class="toolbar">
-
-
-
         <el-input v-model="keyword" placeholder="按标题搜索" clearable style="width: 240px" @keyup.enter="loadData" />
-
-
-
         <el-button type="primary" @click="loadData">搜索</el-button>
-
-
-
         <el-button type="success" @click="openDialog()">新增公告</el-button>
-
-
-
       </div>
-
-
-
-
-
-
-
       <el-table :data="tableData" v-loading="loading" size="small">
-
-
-
         <el-table-column prop="id" label="ID" width="70" />
-
-
-
         <el-table-column prop="title" label="标题" min-width="220" show-overflow-tooltip />
-
-
-
         <el-table-column prop="content" label="内容" min-width="260" show-overflow-tooltip />
-
-
-
         <el-table-column prop="isTop" label="置顶" width="90">
-
-
-
           <template #default="{ row }">
-
-
-
             <el-tag :type="row.isTop === 1 ? 'danger' : 'info'">{{ row.isTop === 1 ? '置顶' : '普通' }}</el-tag>
-
-
-
           </template>
-
-
-
         </el-table-column>
-
-
-
         <el-table-column prop="status" label="状态" width="90">
-
-
-
           <template #default="{ row }">
-
-
-
             <el-tag :type="row.status === 1 ? 'success' : 'info'">{{ row.status === 1 ? '发布' : '下线' }}</el-tag>
-
-
-
           </template>
-
-
-
         </el-table-column>
-
-
-
         <el-table-column prop="publishTime" label="发布时间" width="180" />
 
-
-
         <el-table-column label="操作" width="280" fixed="right">
-
-
 
           <template #default="{ row }">
 
