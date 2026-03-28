@@ -93,45 +93,45 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
           <div class="md:col-span-5 flex flex-col items-start">
             <div class="flex items-center gap-3 mb-6">
-              <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center border site-soft-border">
+              <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center border site-footer-soft-border">
                 <span class="material-symbols-outlined text-on-primary">public</span>
               </div>
-              <h2 class="text-xl font-extrabold font-headline text-[color:var(--app-header-text)]">新闻资讯互动平台</h2>
+              <h2 class="text-xl font-extrabold font-headline text-[color:var(--app-footer-text)]">新闻资讯互动平台</h2>
             </div>
             <h3 class="text-sm font-bold text-secondary-fixed mb-4 tracking-widest uppercase">洞察 · 及时 · 互动</h3>
-            <p class="text-sm text-[color:var(--app-header-subtle)] leading-relaxed max-w-sm mb-8">
+            <p class="text-sm text-[color:var(--app-footer-subtle)] leading-relaxed max-w-sm mb-8">
               致力于打造更及时、更有趣、更具互动性的新闻资讯平台，让每位读者获取高质量信息，发现更有价值的声音。
             </p>
           </div>
 
           <div class="md:col-span-3 md:col-start-7">
-            <h4 class="text-sm font-bold text-[color:var(--app-header-text)] uppercase tracking-wider mb-6 pb-2 border-b site-soft-border inline-block">友情链接</h4>
+            <h4 class="text-sm font-bold text-[color:var(--app-footer-text)] uppercase tracking-wider mb-6 pb-2 border-b site-footer-soft-border inline-block">友情链接</h4>
             <ul v-if="friendLinks.length" class="space-y-4">
               <li v-for="link in friendLinks" :key="link.id">
-                <a :href="normalizeLink(link.url)" target="_blank" rel="noopener noreferrer" class="text-sm text-[color:var(--app-header-subtle)] hover:text-[color:var(--app-header-text)] transition-colors flex items-center gap-2 group">
+                <a :href="normalizeLink(link.url)" target="_blank" rel="noopener noreferrer" class="text-sm text-[color:var(--app-footer-subtle)] hover:text-[color:var(--app-footer-text)] transition-colors flex items-center gap-2 group">
                   <span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed group-hover:scale-150 transition-transform"></span>
                   {{ link.name }}
                 </a>
               </li>
             </ul>
-            <p v-else class="text-sm text-[color:var(--app-header-subtle)] opacity-70">暂无友情链接</p>
+            <p v-else class="text-sm text-[color:var(--app-footer-subtle)] opacity-70">暂无友情链接</p>
           </div>
 
           <div class="md:col-span-3">
-            <h4 class="text-sm font-bold text-[color:var(--app-header-text)] uppercase tracking-wider mb-6 pb-2 border-b site-soft-border inline-block">关于我们</h4>
-            <p class="text-sm text-[color:var(--app-header-subtle)] leading-relaxed mb-6">{{ aboutText || '快速了解最新时事，发现生活点滴。' }}</p>
-            <router-link to="/about" class="inline-flex items-center gap-2 text-sm font-bold text-secondary-fixed hover:text-[color:var(--app-header-text)] transition-colors group">
+            <h4 class="text-sm font-bold text-[color:var(--app-footer-text)] uppercase tracking-wider mb-6 pb-2 border-b site-footer-soft-border inline-block">关于我们</h4>
+            <p class="text-sm text-[color:var(--app-footer-subtle)] leading-relaxed mb-6">{{ aboutText || '快速了解最新时事，发现生活点滴。' }}</p>
+            <router-link to="/about" class="inline-flex items-center gap-2 text-sm font-bold text-secondary-fixed hover:text-[color:var(--app-footer-text)] transition-colors group">
               了解更多 
               <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </router-link>
           </div>
         </div>
 
-        <div class="mt-16 pt-8 border-t site-soft-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p class="text-xs text-[color:var(--app-header-subtle)] opacity-75">© 2026 新闻资讯互动平台. All rights reserved.</p>
+        <div class="mt-16 pt-8 border-t site-footer-soft-border flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-xs text-[color:var(--app-footer-subtle)] opacity-75">© 2026 新闻资讯互动平台. All rights reserved.</p>
           <div class="flex gap-4">
-             <a href="#" class="site-footer-icon"><span class="material-symbols-outlined text-sm text-[color:var(--app-header-subtle)]">share</span></a>
-             <a href="#" class="site-footer-icon"><span class="material-symbols-outlined text-sm text-[color:var(--app-header-subtle)]">mail</span></a>
+             <a href="#" class="site-footer-icon"><span class="material-symbols-outlined text-sm text-[color:var(--app-footer-subtle)]">share</span></a>
+             <a href="#" class="site-footer-icon"><span class="material-symbols-outlined text-sm text-[color:var(--app-footer-subtle)]">mail</span></a>
           </div>
         </div>
       </div>
@@ -232,13 +232,13 @@ const handleThemeToggle = () => {
 
 <style scoped>
 .site-header {
-  background: color-mix(in srgb, rgb(var(--twc-primary)) 92%, transparent);
+  background: var(--app-header-bg);
   border-bottom: 1px solid var(--app-header-border);
   color: var(--app-header-text);
 }
 
 .site-header-scrolled {
-  box-shadow: 0 16px 28px rgb(var(--app-accent-rgb) / 0.12);
+  box-shadow: var(--app-header-shadow);
 }
 
 .site-soft-border {
@@ -295,8 +295,9 @@ const handleThemeToggle = () => {
 }
 
 .site-mobile-nav {
-  background: var(--app-header-panel-strong);
+  background: var(--app-header-bg);
   border-top: 1px solid var(--app-header-border);
+  border-bottom: 1px solid var(--app-header-border);
 }
 
 .site-mobile-link-idle {
@@ -314,13 +315,17 @@ const handleThemeToggle = () => {
 }
 
 .site-footer {
-  background: rgb(var(--twc-primary));
-  color: var(--app-header-text);
-  border-top: 1px solid color-mix(in srgb, var(--app-header-border) 90%, transparent);
+  background: var(--app-footer-bg);
+  color: var(--app-footer-text);
+  border-top: 1px solid color-mix(in srgb, var(--app-footer-border) 90%, transparent);
 }
 
 .site-footer-surface {
-  background: color-mix(in srgb, rgb(var(--twc-primary)) 90%, transparent);
+  background: var(--app-footer-surface);
+}
+
+.site-footer-soft-border {
+  border-color: var(--app-footer-border);
 }
 
 .site-footer-icon {
@@ -330,12 +335,12 @@ const handleThemeToggle = () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--app-header-hover);
+  background: var(--app-footer-hover);
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .site-footer-icon:hover {
-  background: var(--app-header-panel-soft);
+  background: var(--app-footer-panel-soft);
   transform: translateY(-1px);
 }
 

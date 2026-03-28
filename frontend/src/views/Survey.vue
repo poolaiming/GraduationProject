@@ -289,9 +289,9 @@ onMounted(loadData);
   gap: 10px;
   flex-wrap: wrap;
   padding: 12px;
-  border: 1px solid #e7edf8;
+  border: 1px solid var(--app-panel-border);
   border-radius: 12px;
-  background: #f8fbff;
+  background: var(--app-panel-bg-soft);
 }
 
 .pager {
@@ -300,8 +300,8 @@ onMounted(loadData);
 
 /* 详情弹窗样式 */
 .detail-meta {
-  background: #f8fbff;
-  border: 1px solid #e6edf7;
+  background: var(--app-panel-bg-soft);
+  border: 1px solid var(--app-panel-border);
   border-radius: 10px;
   padding: 14px 18px;
   margin-bottom: 18px;
@@ -322,18 +322,18 @@ onMounted(loadData);
 .detail-label {
   flex-shrink: 0;
   width: 72px;
-  color: #64748b;
+  color: var(--app-panel-text-muted);
   font-size: 13px;
 }
 
 .detail-value {
-  color: #1e293b;
+  color: var(--app-panel-text-main);
   font-size: 14px;
 }
 
 .detail-section-title {
   font-weight: 600;
-  color: #334155;
+  color: var(--app-panel-text);
   margin-bottom: 10px;
   font-size: 14px;
 }
@@ -341,15 +341,15 @@ onMounted(loadData);
 .question-item {
   margin-top: 10px;
   padding: 12px 14px;
-  background: #f7faff;
+  background: var(--app-panel-bg-soft);
   border-radius: 10px;
-  border: 1px solid #e6edf7;
+  border: 1px solid var(--app-panel-border);
 }
 
 .question-title {
   font-weight: 600;
   margin-bottom: 8px;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -361,7 +361,7 @@ onMounted(loadData);
   align-items: center;
   gap: 6px;
   margin-top: 6px;
-  color: #475569;
+  color: var(--app-panel-text-sub);
   font-size: 13px;
 }
 
@@ -372,8 +372,8 @@ onMounted(loadData);
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #e0e7ff;
-  color: #4f46e5;
+  background: var(--app-panel-accent-soft);
+  color: var(--app-panel-accent-text);
   font-size: 12px;
   font-weight: 600;
   flex-shrink: 0;
@@ -383,20 +383,20 @@ onMounted(loadData);
 .survey-header {
   margin-bottom: 20px;
   padding: 14px 16px;
-  border: 1px solid #e7edf8;
+  border: 1px solid var(--app-panel-border);
   border-radius: 10px;
-  background: #f8fbff;
+  background: var(--app-panel-bg-soft);
 }
 
 .survey-header-title {
   font-size: 16px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--app-panel-text-main);
   margin-bottom: 6px;
 }
 
 .survey-header-desc {
-  color: #64748b;
+  color: var(--app-panel-text-muted);
   font-size: 13px;
   margin-bottom: 8px;
 }
@@ -405,7 +405,7 @@ onMounted(loadData);
   display: flex;
   gap: 20px;
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--app-panel-text-faint);
 }
 
 .survey-header-time span {
@@ -417,15 +417,15 @@ onMounted(loadData);
 .answer-question {
   margin-bottom: 14px;
   padding: 14px 16px;
-  background: #f8fbff;
+  background: var(--app-panel-bg-soft);
   border-radius: 10px;
-  border: 1px solid #e6edf7;
+  border: 1px solid var(--app-panel-border);
 }
 
 .answer-question .question-title {
   font-weight: 600;
   margin-bottom: 12px;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
 }
 
 .q-index {
@@ -435,8 +435,8 @@ onMounted(loadData);
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #3b82f6;
-  color: #fff;
+  background: var(--app-panel-accent-strong);
+  color: var(--app-panel-accent-contrast);
   font-size: 12px;
   font-weight: 700;
   margin-right: 6px;
@@ -444,7 +444,7 @@ onMounted(loadData);
 }
 
 .question-type {
-  color: #94a3b8;
+  color: var(--app-panel-text-faint);
   font-size: 12px;
   margin-left: 6px;
   font-weight: 400;
@@ -464,8 +464,8 @@ onMounted(loadData);
   width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: #fff;
+  border: 1px solid var(--app-panel-border);
+  background: var(--app-panel-bg);
   transition: border-color 0.2s, background 0.2s;
   height: auto;
   line-height: 1.5;
@@ -474,8 +474,8 @@ onMounted(loadData);
 }
 
 .option-radio:hover {
-  border-color: #93c5fd;
-  background: #eff6ff;
+  border-color: var(--app-panel-border-strong);
+  background: var(--app-panel-bg-soft);
 }
 
 .option-radio .opt-label {

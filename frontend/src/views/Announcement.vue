@@ -200,8 +200,8 @@ onMounted(loadData);
 
 .announcement-card {
   padding: 18px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--app-panel-bg);
+  border: 1px solid var(--app-panel-border);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -214,12 +214,12 @@ onMounted(loadData);
 .announcement-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(37, 99, 235, 0.08);
-  border-color: #bfdbfe;
+  border-color: var(--app-panel-border-strong);
 }
 
 .announcement-card.is-active {
   border-color: var(--app-primary, #001b44);
-  background: #f8fafc;
+  background: var(--app-panel-bg-soft);
   box-shadow: 0 0 0 1px var(--app-primary, #001b44);
 }
 
@@ -241,7 +241,7 @@ onMounted(loadData);
   margin: 0;
   font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -257,7 +257,7 @@ onMounted(loadData);
 
 .announcement-card-meta {
   font-size: 13px;
-  color: #64748b;
+  color: var(--app-panel-text-muted);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -274,7 +274,7 @@ onMounted(loadData);
   width: 6px;
 }
 .announcement-detail-container::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--app-panel-border-strong);
   border-radius: 4px;
 }
 
@@ -283,7 +283,7 @@ onMounted(loadData);
   font-weight: 800;
   margin-top: 0;
   margin-bottom: 20px;
-  color: #0f172a;
+  color: var(--app-panel-text-main);
   line-height: 1.4;
   letter-spacing: -0.5px;
 }
@@ -307,8 +307,8 @@ onMounted(loadData);
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background: #f1f5f9;
-  color: #64748b;
+  background: var(--app-panel-bg-muted);
+  color: var(--app-panel-text-muted);
   border-radius: 999px;
   font-size: 13px;
   font-weight: 500;
@@ -316,8 +316,8 @@ onMounted(loadData);
 }
 
 .meta-badge:hover {
-  background: #e2e8f0;
-  color: #475569;
+  background: var(--app-panel-border);
+  color: var(--app-panel-text-sub);
 }
 
 .meta-badge .el-icon {
@@ -327,37 +327,37 @@ onMounted(loadData);
 .like-btn {
   padding: 10px 24px;
   font-weight: 600;
-  border: 1px solid #e2e8f0 !important;
-  background: #ffffff !important;
-  color: #64748b !important;
+  border: 1px solid var(--app-panel-border) !important;
+  background: var(--app-panel-bg) !important;
+  color: var(--app-panel-text-muted) !important;
   transition: all 0.3s ease;
 }
 
 .like-btn:hover {
-  border-color: #cbd5e1 !important;
-  background: #f8fafc !important;
-  color: #475569 !important;
+  border-color: var(--app-panel-border-strong) !important;
+  background: var(--app-panel-bg-soft) !important;
+  color: var(--app-panel-text-sub) !important;
 }
 
 .like-btn.is-liked {
-  background: #fff1f2 !important;
-  border-color: #fecdd3 !important;
-  color: #e11d48 !important;
+  background: var(--app-panel-danger-bg) !important;
+  border-color: var(--app-panel-danger-border) !important;
+  color: var(--app-panel-danger-text) !important;
 }
 
 .like-btn.is-liked:hover {
-  background: #ffe4e6 !important;
-  border-color: #fda4af !important;
+  background: var(--app-panel-danger-bg-hover) !important;
+  border-color: var(--app-panel-danger-border-strong) !important;
 }
 
 .detail-divider {
   margin: 24px 0;
-  border-color: #e2e8f0;
+  border-color: var(--app-panel-border);
 }
 
 .detail-content {
   line-height: 2;
-  color: #334155;
+  color: var(--app-panel-text);
   font-size: 16px;
   padding-bottom: 10px;
 }

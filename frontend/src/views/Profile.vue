@@ -106,7 +106,7 @@
                         <el-table-column prop="reviewRemark" label="驳回原因/审核意见" min-width="220" show-overflow-tooltip>
                           <template #default="{ row }">
                             <span v-if="row.reviewRemark">{{ row.reviewRemark }}</span>
-                            <span v-else style="color: #94a3b8">--</span>
+                            <span v-else style="color: var(--app-panel-text-faint)">--</span>
                           </template>
                         </el-table-column>
                         <el-table-column prop="publishTime" label="发布时间" width="180" />
@@ -222,10 +222,9 @@
       v-model="editNewsVisible"
       title="编辑新闻"
       width="760px"
-      top="119px"
-      style="max-width: 95vw; transform: translateX(-19px);"
-      draggable
-      overflow
+      class="profile-news-edit-dialog"
+      align-center
+      :lock-scroll="false"
     >
       <div class="news-edit-scroll-container">
         <el-form :model="editNewsForm" label-width="70px" class="news-edit-form">
@@ -524,6 +523,16 @@ const onChangePassword = async () => {
 const onRequestCancelAccount = async () => {
   if (!ensureLogin()) return;
   try {
+    await ElMessageBox.confirm(
+      '注销申请提交后，你将立即退出当前账号，并需要等待管理员审核处理。确认继续申请注销账号吗？',
+      '二次确认',
+      {
+        type: 'warning',
+        confirmButtonText: '确认申请',
+        cancelButtonText: '取消',
+        confirmButtonClass: 'el-button--danger'
+      }
+    );
     await requestCancelAccount({ userId: currentUser.value.id });
     ElMessage.success('注销申请已提交，请等待管理员处理');
     userStore.logout();
@@ -730,10 +739,10 @@ onMounted(async () => {
 }
 
 .panel-card {
-  border: 1px solid #e9eef6;
+  border: 1px solid var(--app-panel-border);
   border-radius: 14px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  background: linear-gradient(180deg, var(--app-panel-bg) 0%, var(--app-panel-bg-soft) 100%);
 }
 
 .panel-card :deep(.el-card__header) {
@@ -748,7 +757,7 @@ onMounted(async () => {
 .card-title {
   font-weight: 600;
   font-size: 15px;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
 }
 
 .panel-card--content :deep(.el-tabs__header) {
@@ -780,9 +789,9 @@ onMounted(async () => {
 
 .news-list-wrap {
   padding: 12px;
-  border: 1px solid #e8eef7;
+  border: 1px solid var(--app-panel-border);
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--app-panel-bg);
   min-height: 0;
 }
 
@@ -801,17 +810,17 @@ onMounted(async () => {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #334155;
+  color: var(--app-panel-text);
 }
 
 .publish-tip {
   margin-left: 10px;
   font-size: 12px;
-  color: #64748b;
+  color: var(--app-panel-text-muted);
 }
 
 .history-link {
-  color: #001b44;
+  color: var(--app-primary);
   cursor: pointer;
   text-decoration: none;
 }
@@ -834,22 +843,22 @@ onMounted(async () => {
 
 .content-preview {
   margin-top: 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--app-panel-border);
   border-radius: 8px;
-  background: #fafafa;
+  background: var(--app-panel-bg-soft);
 }
 
 .content-preview-title {
   font-size: 13px;
-  color: #475569;
+  color: var(--app-panel-text-sub);
   font-weight: 600;
   padding: 8px 10px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--app-panel-border);
 }
 
 .content-preview-body {
   padding: 10px;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
   line-height: 1.8;
   max-height: 250px;
   overflow-y: auto;
@@ -862,6 +871,10 @@ onMounted(async () => {
   padding-right: 6px;
 }
 
+:deep(.profile-news-edit-dialog) {
+  max-width: 95vw;
+}
+
 /* Custom scrollbar for better appearance */
 .news-edit-scroll-container::-webkit-scrollbar,
 .content-preview-body::-webkit-scrollbar {
@@ -869,7 +882,7 @@ onMounted(async () => {
 }
 .news-edit-scroll-container::-webkit-scrollbar-thumb,
 .content-preview-body::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--app-panel-border-strong);
   border-radius: 4px;
 }
 
@@ -884,22 +897,22 @@ onMounted(async () => {
   flex-shrink: 0;
   font-size: 22px;
   font-weight: 600;
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--app-panel-accent-soft);
+  color: var(--app-panel-accent-text);
 }
 
-.comment-input-area { margin-bottom: 20px; padding: 16px; background: #f8fafc; border-radius: 8px; }
+.comment-input-area { margin-bottom: 20px; padding: 16px; background: var(--app-panel-bg-soft); border: 1px solid var(--app-panel-border); border-radius: 8px; }
 .comment-actions { margin-top: 10px; text-align: right; }
 
 .comment-list { max-height: 500px; overflow-y: auto; }
-.comment-item { display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid #e5e7eb; }
+.comment-item { display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid var(--app-panel-border); }
 .comment-item:last-child { border-bottom: none; }
 .comment-avatar { flex-shrink: 0; }
 .comment-body { flex: 1; min-width: 0; }
 .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.comment-username { font-weight: 600; color: #1e293b; font-size: 14px; }
-.comment-time { font-size: 12px; color: #94a3b8; }
-.comment-content { color: #475569; font-size: 14px; line-height: 1.6; word-wrap: break-word; }
+.comment-username { font-weight: 600; color: var(--app-panel-text-main); font-size: 14px; }
+.comment-time { font-size: 12px; color: var(--app-panel-text-faint); }
+.comment-content { color: var(--app-panel-text-sub); font-size: 14px; line-height: 1.6; word-wrap: break-word; }
 
 @media (max-width: 1200px) {
   .profile-page {

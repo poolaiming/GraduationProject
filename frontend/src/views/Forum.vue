@@ -356,27 +356,27 @@ onMounted(async () => {
 <style scoped>
 .forum-page { max-width: 1240px; margin: 0 auto; }
 .head-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.toolbar { margin-bottom: 12px; display: flex; gap: 10px; flex-wrap: wrap; padding: 12px; border: 1px solid #e8eef8; border-radius: 12px; background: #f8fbff; }
+.toolbar { margin-bottom: 12px; display: flex; gap: 10px; flex-wrap: wrap; padding: 12px; border: 1px solid var(--app-panel-border); border-radius: 12px; background: var(--app-panel-bg-soft); }
 .pager { margin-top: 16px; }
 
-.stat-badge { display: inline-flex; align-items: center; gap: 4px; color: #64748b; font-size: 14px; }
+.stat-badge { display: inline-flex; align-items: center; gap: 4px; color: var(--app-panel-text-muted); font-size: 14px; }
 .stat-badge .el-icon { font-size: 16px; }
 
 .post-detail { padding: 6px 2px; }
-.post-detail-title { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 12px; line-height: 1.4; }
-.post-detail-meta { display: flex; flex-wrap: wrap; gap: 14px; color: #64748b; font-size: 13px; margin-bottom: 14px; }
-.post-detail-content { white-space: pre-wrap; line-height: 1.8; color: #334155; font-size: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; max-height: 420px; overflow: auto; }
+.post-detail-title { font-size: 22px; font-weight: 700; color: var(--app-panel-text-main); margin-bottom: 12px; line-height: 1.4; }
+.post-detail-meta { display: flex; flex-wrap: wrap; gap: 14px; color: var(--app-panel-text-muted); font-size: 13px; margin-bottom: 14px; }
+.post-detail-content { white-space: pre-wrap; line-height: 1.8; color: var(--app-panel-text); font-size: 14px; background: var(--app-panel-bg-soft); border: 1px solid var(--app-panel-border); border-radius: 10px; padding: 14px; max-height: 420px; overflow: auto; }
 
-.comment-input-area { margin-bottom: 20px; padding: 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e6edf6; }
+.comment-input-area { margin-bottom: 20px; padding: 16px; background: var(--app-panel-bg-soft); border-radius: 10px; border: 1px solid var(--app-panel-border); }
 .comment-actions { margin-top: 10px; text-align: right; }
 
 .comment-list { max-height: 500px; overflow-y: auto; }
-.comment-item { display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid #e5e7eb; }
+.comment-item { display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid var(--app-panel-border); }
 .comment-item:last-child { border-bottom: none; }
 .comment-avatar { flex-shrink: 0; }
 .comment-body { flex: 1; min-width: 0; }
 .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.comment-username { font-weight: 600; color: #1e293b; font-size: 14px; }
-.comment-time { font-size: 12px; color: #94a3b8; }
-.comment-content { color: #475569; font-size: 14px; line-height: 1.6; word-wrap: break-word; }
+.comment-username { font-weight: 600; color: var(--app-panel-text-main); font-size: 14px; }
+.comment-time { font-size: 12px; color: var(--app-panel-text-faint); }
+.comment-content { color: var(--app-panel-text-sub); font-size: 14px; line-height: 1.6; word-wrap: break-word; }
 </style>

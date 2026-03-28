@@ -281,7 +281,7 @@ onMounted(loadDetail);
   font-weight: 700;
   margin-bottom: 10px;
   line-height: 1.35;
-  color: #0f172a;
+  color: var(--app-panel-text-main);
 }
 .news-meta {
   font-size: 13px;
@@ -295,8 +295,8 @@ onMounted(loadDetail);
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #f8fbff;
-  border: 1px solid #e6edf7;
+  background: var(--app-panel-bg-soft);
+  border: 1px solid var(--app-panel-border);
   padding: 4px 10px;
   border-radius: 999px;
 }
@@ -316,7 +316,7 @@ onMounted(loadDetail);
 .action-row :deep(.el-button) { min-width: 104px; }
 .news-content {
   line-height: 1.95;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
   margin-bottom: 26px;
   font-size: 15px;
 }
@@ -334,8 +334,8 @@ onMounted(loadDetail);
 .comment-input-area {
   margin-bottom: 20px;
   padding: 16px;
-  background: #f8fbff;
-  border: 1px solid #e6edf7;
+  background: var(--app-panel-bg-soft);
+  border: 1px solid var(--app-panel-border);
   border-radius: 10px;
 }
 .comment-actions {
@@ -348,9 +348,9 @@ onMounted(loadDetail);
   display: flex;
   gap: 12px;
   padding: 14px;
-  border: 1px solid #e8eef8;
+  border: 1px solid var(--app-panel-border);
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--app-panel-bg);
   margin-bottom: 10px;
 }
 .comment-card:last-child { margin-bottom: 0; }
@@ -371,15 +371,15 @@ onMounted(loadDetail);
 }
 .comment-username {
   font-weight: 600;
-  color: #1e293b;
+  color: var(--app-panel-text-main);
   font-size: 14px;
 }
 .comment-time {
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--app-panel-text-faint);
 }
 .comment-content {
-  color: #475569;
+  color: var(--app-panel-text-sub);
   font-size: 14px;
   line-height: 1.7;
   word-wrap: break-word;
